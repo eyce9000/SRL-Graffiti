@@ -15,6 +15,8 @@ import org.apache.http.entity.mime.content.FileBody;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import srl.graffiti.GraffitiSerialization;
+
 import com.grl.json.JSONMapperProvider;
 import com.grl.json.client.Client;
 import com.grl.json.messages.ErrorResponse;
@@ -29,7 +31,7 @@ public class ImageUploader {
 		authCookieValue = value;
 	}
 	
-	public static Response uploadFiles(String uploadUrl,UploadProgressListener listener, JSONMapperProvider mapperProvider
+	public static Response uploadFiles(String uploadUrl,UploadProgressListener listener
 			,File imageFile){
 		/*
 		 * This upload code is a modified version of that found on this website
@@ -101,7 +103,7 @@ public class ImageUploader {
 			int serverResponseCode = connection.getResponseCode();
 			log.info("Image upload response: "+serverResponseCode);
 			String serverResponseMessage = connection.getResponseMessage();
-			Response response = mapperProvider.buildMapper().readValue(
+			Response response = GraffitiSerialization.mapperProvider.buildMapper().readValue(
 					connection.getInputStream(), Response.class);
 
 			fileInputStream.close();

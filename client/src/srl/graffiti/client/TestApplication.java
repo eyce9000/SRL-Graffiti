@@ -95,7 +95,7 @@ public class TestApplication {
 
 		};
 
-		Response response = ImageUploader.uploadFiles(sessionURL, listener,client,
+		Response response = ImageUploader.uploadFiles(sessionURL, listener,
 				new File("image.jpg"));
 		String imageURL = ((ImageCreatedResponse) response).getImageURL();
 		

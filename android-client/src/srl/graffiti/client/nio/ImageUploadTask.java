@@ -1,4 +1,4 @@
-package srl.graffiti.client;
+package srl.graffiti.client.nio;
 
 /*******************************************************************************
  *  Revision History:<br>
@@ -34,37 +34,45 @@ package srl.graffiti.client;
  *  </pre>
  *  
  *******************************************************************************/
-
-import java.net.MalformedURLException;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.net.HttpURLConnection;
 import java.net.URL;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import srl.graffiti.client.ImageUploader;
+import srl.graffiti.client.UploadProgressListener;
 
-import srl.graffiti.messages.BatchRequest;
-
-import com.grl.json.client.Client;
-import com.grl.json.messages.Request;
+import com.grl.json.JSONMapperProvider;
+import com.grl.json.messages.ErrorResponse;
 import com.grl.json.messages.Response;
 
-public class GraffitiClient {
-	
-	public static final String SERVER_URL = "http://localhost:8888/";
-	public static final String REQUESTS_URL = SERVER_URL+"requests";
-	public static final String CLIENT_TOKEN = "srl";
-	
-	private Client client;
-	private static Logger log = LoggerFactory.getLogger("GraffitiClient");
-	
-	public GraffitiClient(){
-		try {
-			client = new Client(new URL(REQUESTS_URL+"/?key="+CLIENT_TOKEN));
-		} catch (MalformedURLException e) {
-			log.error("Bad Connection URL", e);
-		}
+import android.os.AsyncTask;
+import android.util.Log;
+
+public class ImageUploadTask extends AsyncTask<File, Double, Response> {
+	private String uploadUrl;
+	private JSONMapperProvider mapperProvider;
+	private UploadProgressListener listener;
+	public ImageUploadTask(String uploadUrl, JSONMapperProvider mapperProvider){
+		this.uploadUrl = uploadUrl;
+		this.mapperProvider = mapperProvider;
+		listener = new UploadProgressListener(){
+
+			@Override
+			public void onUploadProgress(File file, long uploadedBytes,
+					long totalBytes) {
+				ImageUploadTask.this.onProgressUpdate(((double)uploadedBytes)/((double)totalBytes));
+			}
+			
+		};
 	}
 	
-	public boolean testConnection(){
-		return client.testConnection();
+	@Override
+	protected Response doInBackground(File... imageFiles) {
+		
+		return ImageUploader.uploadFiles(uploadUrl, listener, imageFiles[0]);
 	}
+
 }

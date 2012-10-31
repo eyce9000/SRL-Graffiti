@@ -75,6 +75,7 @@ public class LoginHelper {
 
 			post.abort();
 
+			
 			HttpGet get = new HttpGet(
 					"https://srl-graffiti.appspot.com/_ah/login?auth="
 							+ authToken);
