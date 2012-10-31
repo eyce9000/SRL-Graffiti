@@ -1,0 +1,111 @@
+//REQUEST
+{
+  "@class" : "com.grl.json.messages.PingRequest",
+  "startTime" : 1351640774615
+}
+//RESPONSE
+{
+  "@class" : "com.grl.json.messages.PingResponse",
+  "success" : true,
+  "difference" : -1835
+}
+//REQUEST
+{
+  "@class" : "srl.graffiti.messages.images.ImageGetSessionRequest"
+}
+//RESPONSE
+{
+  "@class" : "srl.graffiti.messages.images.ImageGetSessionResponse",
+  "success" : false,
+  "sessionURL" : "http://localhost:8888/_ah/upload/agxzcmwtZ3JhZmZpdGlyGwsSFV9fQmxvYlVwbG9hZFNlc3Npb25fXxhDDA"
+}
+//REQUEST
+{
+  "@class" : "srl.graffiti.messages.sketch.SavePositionedSketchRequest",
+  "positionedSketch" : {
+    "@class" : "srl.graffiti.model.PositionedSketch",
+    "sketch" : {
+      "@type" : "Sketch",
+      "id" : "00000000-0001-4d3d-92c1-fe20b41220f8",
+      "contents" : [ {
+        "@type" : "Stroke",
+        "id" : "00000000-0002-4d3d-92c1-fe20b4320120",
+        "points" : [ {
+          "@type" : "Point",
+          "id" : "00000000-0004-4d3d-92c1-fe20b4548510",
+          "x" : 0.0,
+          "y" : 0.0,
+          "time" : -1
+        }, {
+          "@type" : "Point",
+          "id" : "00000000-0006-4d3d-92c1-fe20b454cf48",
+          "x" : 200.0,
+          "y" : 0.0,
+          "time" : -1
+        }, {
+          "@type" : "Point",
+          "id" : "00000000-0008-4d3d-92c1-fe20b454db00",
+          "x" : 100.0,
+          "y" : 100.0,
+          "time" : -1
+        } ]
+      } ]
+    },
+    "point" : {
+      "@type" : "Point",
+      "id" : "00000000-000a-4d3d-92c1-fe20b45eb670",
+      "x" : 300.0,
+      "y" : 300.0,
+      "time" : -1
+    },
+    "latitude" : 90.0,
+    "longitude" : 90.0,
+    "altitude" : 0.0,
+    "imageURL" : "http://127.0.0.1:8888/_ah/img/R_UGXeeunzRBsIu2ky38IQ",
+    "permissions" : "Private",
+    "unstructuredData" : "Hello, this is the unstructured data"
+  }
+}
+//RESPONSE
+{
+  "@class" : "srl.graffiti.messages.sketch.SavePositionedSketchResponse",
+  "success" : false,
+  "positionedSketch" : {
+    "@class" : "srl.graffiti.model.PositionedSketch",
+    "id" : "agxzcmwtZ3JhZmZpdGlyFgsSEFBvc2l0aW9uZWRTa2V0Y2gYRAw",
+    "sketch" : {
+      "@type" : "Sketch",
+      "id" : "00000000-0001-4d3d-92c1-fe20b41220f8",
+      "contents" : [ {
+        "@type" : "Stroke",
+        "id" : "00000000-0002-4d3d-92c1-fe20b4320120",
+        "points" : [ {
+          "@type" : "Point",
+          "id" : "00000000-0004-4d3d-92c1-fe20b4548510",
+          "x" : 0.0,
+          "y" : 0.0,
+          "time" : -1
+        }, {
+          "@type" : "Point",
+          "id" : "00000000-0006-4d3d-92c1-fe20b454cf48",
+          "x" : 200.0,
+          "y" : 0.0,
+          "time" : -1
+        }, {
+          "@type" : "Point",
+          "id" : "00000000-0008-4d3d-92c1-fe20b454db00",
+          "x" : 100.0,
+          "y" : 100.0,
+          "time" : -1
+        } ]
+      } ]
+    },
+    "latitude" : 90.0,
+    "longitude" : 90.0,
+    "altitude" : 0.0,
+    "imageURL" : "http://127.0.0.1:8888/_ah/img/R_UGXeeunzRBsIu2ky38IQ",
+    "ownerName" : "eyce9000",
+    "permissions" : "Private",
+    "unstructuredData" : "Hello, this is the unstructured data"
+  }
+}

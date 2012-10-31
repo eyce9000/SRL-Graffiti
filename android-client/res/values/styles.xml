@@ -1,0 +1,12 @@
+<resources>
+
+    <style name="AppTheme" parent="android:Theme.Light" />
+	<style name="WebviewDialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowAnimationStyle">@style/WebviewDialogAnimation</item>
+    </style>
+
+    <style name="WebviewDialogAnimation">
+        <item name="android:windowEnterAnimation">@android:anim/fade_in</item>
+        <item name="android:windowExitAnimation">@android:anim/fade_out</item>
+    </style>
+</resources>

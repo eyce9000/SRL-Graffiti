@@ -1,0 +1,12 @@
+<resources>
+
+    <string name="app_name">Graffiti Client</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="menu_settings">Settings</string>
+    <string name="title_activity_sample">SampleActivity</string>
+    <string name="authentication_failed">Authentication Failed</string>
+    <string name="no_network">No Network Connection</string>
+    <string name="no_auth_token">No Authorization Token</string>
+    <string name="no_cookie">No Cookie Received</string>
+
+</resources>
