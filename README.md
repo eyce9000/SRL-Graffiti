@@ -1,7 +1,5 @@
-Graffiti Server
---------
 
-Graffiti Servier is backend service for the Graffiti TAMU CHI 2012 Fall project.
+Graffiti Server a is backend service for the Graffiti TAMU CHI 2012 Fall project.
 
 There are 3 distinct projects contained here:
 1. Graffiti Client:
