@@ -9,6 +9,9 @@ import srl.graffiti.client.LoginHelper;
 import srl.graffiti.messages.images.ImageCreatedResponse;
 import srl.graffiti.messages.images.ImageGetSessionRequest;
 import srl.graffiti.messages.images.ImageGetSessionResponse;
+import srl.graffiti.messages.sketch.SavePositionedSketchRequest;
+import srl.graffiti.messages.sketch.SavePositionedSketchResponse;
+import srl.graffiti.model.PositionedSketch;
 
 import android.os.AsyncTask;
 import android.util.Log;
@@ -104,5 +107,27 @@ public class GraffitiClient {
 			}
 		};
 		task.execute(imageFile);
+	}
+	
+	/**
+	 * Stores the positioned sketch on the server. Note that currently, once saved, a positioned sketch is immutable. This may change in future versions.
+	 * @param posSketch The positioned sketch to store. Note that if the positioned sketch already has an id, it will not be saved.
+	 * @param completionCallback The callback called on completion. The callback is passed the saved positioned sketch, including the new id and owner name.
+	 */
+	public void storePositionedSketch(final PositionedSketch posSketch, final Callback<PositionedSketch> completionCallback){
+		AsyncTask task = new AsyncTask<PositionedSketch,Object,PositionedSketch>(){
+			@Override
+			protected PositionedSketch doInBackground(PositionedSketch... params) {
+				SavePositionedSketchResponse saveResponse = client.sendRequest(new SavePositionedSketchRequest(posSketch),SavePositionedSketchResponse.class);
+				return saveResponse.getPositionedSketch();
+			}
+			
+
+			@Override
+			protected void onPostExecute(PositionedSketch positionedSketch){
+				completionCallback.onCallback(positionedSketch);
+			}
+		};
+		task.execute(posSketch);
 	}
 }

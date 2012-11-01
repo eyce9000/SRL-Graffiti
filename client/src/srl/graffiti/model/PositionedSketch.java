@@ -47,8 +47,6 @@ public class PositionedSketch extends SerializableObject{
 	private String id; 
 	
 	private Sketch sketch;
-	
-	public Point point;
 
 	private double latitude, longitude, altitude;
 
@@ -59,6 +57,8 @@ public class PositionedSketch extends SerializableObject{
 	private Permission permissions;
 
 	private String unstructuredData;
+	
+	private long timestamp;
 	
 	/**
 	 * @return the latitude
@@ -168,5 +168,17 @@ public class PositionedSketch extends SerializableObject{
 	 */
 	public void setOwnerName(String ownerName) {
 		this.ownerName = ownerName;
+	}
+	/**
+	 * @return the timestamp
+	 */
+	public long getTimestamp() {
+		return timestamp;
+	}
+	/**
+	 * @param timestamp the timestamp to set
+	 */
+	public void setTimestamp(long timestamp) {
+		this.timestamp = timestamp;
 	}
 }

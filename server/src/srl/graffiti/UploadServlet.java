@@ -46,6 +46,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.codehaus.jackson.map.ObjectMapper;
 
+import srl.graffiti.managers.ImageManager;
 import srl.graffiti.messages.images.ImageCreatedResponse;
 import srl.graffiti.model.Image;
 
@@ -64,7 +65,6 @@ import com.google.appengine.api.users.UserServiceFactory;
 public class UploadServlet extends HttpServlet {
 	private BlobstoreService blobstoreService = BlobstoreServiceFactory
 			.getBlobstoreService();
-	private BlobInfoFactory blobInfoFactory = new BlobInfoFactory();
 
 	public void doPost(HttpServletRequest req, HttpServletResponse res)
 			throws ServletException, IOException {
@@ -75,29 +75,9 @@ public class UploadServlet extends HttpServlet {
 			Map<String, List<BlobKey>> blobs = blobstoreService.getUploads(req);
 			BlobKey blobKey = blobs.get("newImage").get(0);
 
-			ObjectMapper mapper = new ObjectMapper();
-			ImagesService imagesService = ImagesServiceFactory
-					.getImagesService();
-
-			BlobInfo info = blobInfoFactory.loadBlobInfo(blobKey);
-
-			String filename = info.getFilename();
-			long size = info.getSize();
-
-			PersistenceManager pm = PMF.get().getPersistenceManager();
-			Image image = new Image();
-			image.setImageURL(imagesService
-					.getServingUrl(ServingUrlOptions.Builder
-							.withBlobKey(blobKey)));
-			image.setImageKey(blobKey);
-			image.setSize(size);
-			image.setFilename(filename);
-			image.setOwnerId(user.getUserId());
-			image.setOwnerName(user.getNickname());
+			ObjectMapper mapper = GraffitiSerialization.mapperProvider.buildMapper();
 			
-			pm.makePersistent(image);
-			pm.flush();
-			pm.close();
+			Image image = ImageManager.createImage(blobKey, user);
 
 			System.out.println("Stored image: "+image.getImageURL()+" uploaded by "+user.getUserId());
 			

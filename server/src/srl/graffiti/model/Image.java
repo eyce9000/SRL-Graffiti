@@ -67,6 +67,9 @@ public class Image extends SerializableObject{
 	@Persistent
 	private long size;
 	
+	@Persistent
+	private long timestamp;
+	
 
 	public Image(){}
 	
@@ -155,6 +158,20 @@ public class Image extends SerializableObject{
 	@JsonIgnore
 	public void setOwnerId(String ownerId) {
 		this.ownerId = ownerId;
+	}
+
+	/**
+	 * @return the timestamp
+	 */
+	public long getTimestamp() {
+		return timestamp;
+	}
+
+	/**
+	 * @param timestamp the timestamp to set
+	 */
+	public void setTimestamp(long timestamp) {
+		this.timestamp = timestamp;
 	};
 	
 }

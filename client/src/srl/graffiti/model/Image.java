@@ -44,6 +44,8 @@ public class Image extends SerializableObject{
 	
 	private String ownerName;
 	
+	private long timestamp;
+	
 	private long size;
 	
 
@@ -103,6 +105,20 @@ public class Image extends SerializableObject{
 	 */
 	public void setOwnerName(String ownerName) {
 		this.ownerName = ownerName;
+	}
+
+	/**
+	 * @return the timestamp
+	 */
+	public long getTimestamp() {
+		return timestamp;
+	}
+
+	/**
+	 * @param timestamp the timestamp to set
+	 */
+	public void setTimestamp(long timestamp) {
+		this.timestamp = timestamp;
 	}
 	
 }

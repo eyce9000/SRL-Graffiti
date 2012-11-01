@@ -17,6 +17,7 @@ public class SketchManager {
 			if (positionedSketch.getId() == null) {
 				positionedSketch.setOwnerId(user.getUserId());
 				positionedSketch.setOwnerName(user.getNickname());
+				positionedSketch.setTimestamp(System.currentTimeMillis());
 				pm.makePersistent(positionedSketch);
 				pm.close();
 			}

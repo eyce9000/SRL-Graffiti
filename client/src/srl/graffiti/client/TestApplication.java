@@ -55,9 +55,6 @@ public class TestApplication {
 			client.setJSONMapperProvider(GraffitiSerialization.mapperProvider);
 			token = LoginHelper.loginToLocalhost(client.getHttpClient(),
 					"test@gmail.com", false, "http://localhost:8888/");
-			
-			
-
 		} else {
 			client = new Client(new URL(
 					"https://srl-graffiti.appspot.com/graffiti"));
@@ -65,8 +62,6 @@ public class TestApplication {
 			token = LoginHelper.loginToGoogleAppEngine(client.getHttpClient(),
 					"username@gmail.com", "google_password",
 					"https://srl-graffiti.appspot.com/graffiti");
-
-			
 		}
 
 		if (!client.testConnection()) {
@@ -108,7 +103,6 @@ public class TestApplication {
 		
 		
 		PositionedSketch posSketch = new PositionedSketch();
-		posSketch.point = new Point(300,300);
 		posSketch.setSketch(sketch);
 		posSketch.setImageURL(imageURL);
 		posSketch.setLatitude(90);

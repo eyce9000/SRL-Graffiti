@@ -65,7 +65,7 @@ public class PositionedSketch extends SerializableObject{
 	@JsonIgnore
 	private Text sketch;
 	@Persistent
-	private double latitude, longitude, altitude;
+	private double latitude, longitude;
 	@Persistent
 	private String imageURL;
 	@Persistent
@@ -77,6 +77,8 @@ public class PositionedSketch extends SerializableObject{
 	@Persistent
 	@JsonIgnore
 	private Text unstructuredData;
+	@Persistent
+	private long timestamp;
 	
 	/**
 	 * @return the latitude
@@ -207,5 +209,17 @@ public class PositionedSketch extends SerializableObject{
 	 */
 	public void setOwnerName(String ownerName) {
 		this.ownerName = ownerName;
+	}
+	/**
+	 * @return the timestamp
+	 */
+	public long getTimestamp() {
+		return timestamp;
+	}
+	/**
+	 * @param timestamp the timestamp to set
+	 */
+	public void setTimestamp(long timestamp) {
+		this.timestamp = timestamp;
 	}
 }
