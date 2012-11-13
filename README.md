@@ -30,11 +30,11 @@ What do I need to make the project work?
 5. Import the three Eclipse projects project into your Eclipse workspace.
 
 
-<img src="instructions/images/import1.png" />
+<img src="https://raw.github.com/eyce9000/SRL-Graffiti/master/instructions/images/import1.png" />
 
-<img src="instructions/images/import2.png" />
+<img src="https://raw.github.com/eyce9000/SRL-Graffiti/master/instructions/images/import2.png" />
 
-<img src="instructions/images/import3.png" />
+<img src="https://raw.github.com/eyce9000/SRL-Graffiti/master/instructions/images/import3.png" />
 
 ________________
 How do I start the development server?
@@ -43,7 +43,7 @@ How do I start the development server?
 2. Right click on the project.
 3. Go to Run As... -> Web Application
 
-<img src="instructions/images/launch-server.png" />
+<img src="https://raw.github.com/eyce9000/SRL-Graffiti/master/instructions/images/launch-server.png" />
 
 __________________
 Eclipse says I am missing libraries for Graffiti Server! How do I fix it?
@@ -51,6 +51,6 @@ Eclipse says I am missing libraries for Graffiti Server! How do I fix it?
 1. Right click on the project and go to Properties.
 2. Go to the Google project property menu.
 3. Change the App Engine SDK from "Use Default SDK..." to "Use Specific SDK" and pick the latest SDK.
-<img src="instructions/images/fix-references-a.png" />
-<img src="instructions/images/fix-references-b.png" />
+<img src="https://raw.github.com/eyce9000/SRL-Graffiti/master/instructions/images/fix-references-a.png" />
+<img src="https://raw.github.com/eyce9000/SRL-Graffiti/master/instructions/images/fix-references-b.png" />
 4. Click OK. This forces the Google plugin to replace the libraries, getting rid of the errors. If you want you can set the App Engine SDK back to "Used Default SDK" but it is not necessary.
