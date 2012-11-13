@@ -2,15 +2,23 @@ package srl.graffiti.client.nio;
 
 import java.io.File;
 import java.net.URL;
+import java.util.Collection;
 import java.util.List;
 
 import srl.graffiti.client.ImageUploader;
 import srl.graffiti.client.LoginHelper;
+import srl.graffiti.messages.images.GetMyImagesRequest;
+import srl.graffiti.messages.images.GetMyImagesResponse;
 import srl.graffiti.messages.images.ImageCreatedResponse;
 import srl.graffiti.messages.images.ImageGetSessionRequest;
 import srl.graffiti.messages.images.ImageGetSessionResponse;
+import srl.graffiti.messages.sketch.GetMyPositionedSketchesRequest;
+import srl.graffiti.messages.sketch.GetMyPositionedSketchesResponse;
+import srl.graffiti.messages.sketch.GetPublicPositionedSketchesRequest;
+import srl.graffiti.messages.sketch.GetPublicPositionedSketchesResponse;
 import srl.graffiti.messages.sketch.SavePositionedSketchRequest;
 import srl.graffiti.messages.sketch.SavePositionedSketchResponse;
+import srl.graffiti.model.Image;
 import srl.graffiti.model.PositionedSketch;
 
 import android.os.AsyncTask;
@@ -110,7 +118,7 @@ public class GraffitiClient {
 	}
 	
 	/**
-	 * Stores the positioned sketch on the server. Note that currently, once saved, a positioned sketch is immutable. This may change in future versions.
+	 * Stores the positioned sketch on the server. To save over an existing positioned sketch, provide a positioned sketch with the same ID as one already stored.
 	 * @param posSketch The positioned sketch to store. Note that if the positioned sketch already has an id, it will not be saved.
 	 * @param completionCallback The callback called on completion. The callback is passed the saved positioned sketch, including the new id and owner name.
 	 */
@@ -129,5 +137,68 @@ public class GraffitiClient {
 			}
 		};
 		task.execute(posSketch);
+	}
+	
+	/**
+	 * Gets all images uploaded by the currently logged in user. 
+	 * @param completionCallback the callback called on completion. The callback is passed a collection of images belonging to the currently logged in user.
+	 */
+	public void getMyImages(final Callback<Collection<Image>> completionCallback){
+		AsyncTask task = new AsyncTask<Object,Object,Collection<Image>>(){
+			@Override
+			protected Collection<Image> doInBackground(Object... params) {
+				GetMyImagesResponse imagesResponse = client.sendRequest(new GetMyImagesRequest(),GetMyImagesResponse.class);
+				return imagesResponse.getImages();
+			}
+			
+
+			@Override
+			protected void onPostExecute(Collection<Image> images){
+				completionCallback.onCallback(images);
+			}
+		};
+		task.execute(null);
+	}
+
+	/**
+	 * Gets all positioned sketches created by the currently logged in user. 
+	 * @param completionCallback the callback called on completion. The callback is passed a collection of positioned sketches belonging to the currently logged in user.
+	 */
+	public void getMyPositionedSketches(final Callback<Collection<PositionedSketch>> completionCallback){
+		AsyncTask task = new AsyncTask<Object,Object,Collection<PositionedSketch>>(){
+			@Override
+			protected Collection<PositionedSketch> doInBackground(Object... params) {
+				GetMyPositionedSketchesResponse sketchesResponse = client.sendRequest(new GetMyPositionedSketchesRequest(),GetMyPositionedSketchesResponse.class);
+				return sketchesResponse.getPositionedSketches();
+			}
+			
+
+			@Override
+			protected void onPostExecute(Collection<PositionedSketch> sketches){
+				completionCallback.onCallback(sketches);
+			}
+		};
+		task.execute(null);
+	}
+	
+	/**
+	 * Gets all positioned sketches that have public permissions 
+	 * @param completionCallback the callback called on completion. The callback is passed a collection of all public positioned sketches.
+	 */
+	public void getPublicPositionedSketches(final Callback<Collection<PositionedSketch>> completionCallback){
+		AsyncTask task = new AsyncTask<Object,Object,Collection<PositionedSketch>>(){
+			@Override
+			protected Collection<PositionedSketch> doInBackground(Object... params) {
+				GetPublicPositionedSketchesResponse sketchesResponse = client.sendRequest(new GetPublicPositionedSketchesRequest(),GetPublicPositionedSketchesResponse.class);
+				return sketchesResponse.getPositionedSketches();
+			}
+			
+
+			@Override
+			protected void onPostExecute(Collection<PositionedSketch> sketches){
+				completionCallback.onCallback(sketches);
+			}
+		};
+		task.execute(null);
 	}
 }

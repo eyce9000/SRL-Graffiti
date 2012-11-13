@@ -22,7 +22,6 @@ public class GraffitiSerialization {
 			mapper.setVisibility(JsonMethod.FIELD, Visibility.ANY);
 			mapper.configure(Feature.INDENT_OUTPUT, true);
 			mapper.configure(Feature.WRITE_NULL_MAP_VALUES, false);
-			mapper.setSerializationInclusion(Inclusion.NON_EMPTY);
 			mapper.enableDefaultTypingAsProperty(ObjectMapper.DefaultTyping.JAVA_LANG_OBJECT, "@type");
 			mapper.getSerializationConfig().addMixInAnnotations(Color.class, TypeAttributeMixin.class);
 			mapper.getDeserializationConfig().addMixInAnnotations(Color.class, TypeAttributeMixin.class);

@@ -1,13 +1,13 @@
 //REQUEST
 {
   "@class" : "com.grl.json.messages.PingRequest",
-  "startTime" : 1351640774615
+  "startTime" : 1352831482630
 }
 //RESPONSE
 {
   "@class" : "com.grl.json.messages.PingResponse",
   "success" : true,
-  "difference" : -1835
+  "difference" : -1579
 }
 //REQUEST
 {
@@ -17,95 +17,101 @@
 {
   "@class" : "srl.graffiti.messages.images.ImageGetSessionResponse",
   "success" : false,
-  "sessionURL" : "http://localhost:8888/_ah/upload/agxzcmwtZ3JhZmZpdGlyGwsSFV9fQmxvYlVwbG9hZFNlc3Npb25fXxhDDA"
+  "sessionURL" : "http://localhost:8888/_ah/upload/agxzcmwtZ3JhZmZpdGlyGwsSFV9fQmxvYlVwbG9hZFNlc3Npb25fXxhbDA"
 }
 //REQUEST
 {
-  "@class" : "srl.graffiti.messages.sketch.SavePositionedSketchRequest",
-  "positionedSketch" : {
-    "@class" : "srl.graffiti.model.PositionedSketch",
-    "sketch" : {
-      "@type" : "Sketch",
-      "id" : "00000000-0001-4d3d-92c1-fe20b41220f8",
-      "contents" : [ {
-        "@type" : "Stroke",
-        "id" : "00000000-0002-4d3d-92c1-fe20b4320120",
-        "points" : [ {
-          "@type" : "Point",
-          "id" : "00000000-0004-4d3d-92c1-fe20b4548510",
-          "x" : 0.0,
-          "y" : 0.0,
-          "time" : -1
-        }, {
-          "@type" : "Point",
-          "id" : "00000000-0006-4d3d-92c1-fe20b454cf48",
-          "x" : 200.0,
-          "y" : 0.0,
-          "time" : -1
-        }, {
-          "@type" : "Point",
-          "id" : "00000000-0008-4d3d-92c1-fe20b454db00",
-          "x" : 100.0,
-          "y" : 100.0,
-          "time" : -1
-        } ]
-      } ]
-    },
-    "point" : {
-      "@type" : "Point",
-      "id" : "00000000-000a-4d3d-92c1-fe20b45eb670",
-      "x" : 300.0,
-      "y" : 300.0,
-      "time" : -1
-    },
-    "latitude" : 90.0,
-    "longitude" : 90.0,
-    "altitude" : 0.0,
-    "imageURL" : "http://127.0.0.1:8888/_ah/img/R_UGXeeunzRBsIu2ky38IQ",
-    "permissions" : "Private",
-    "unstructuredData" : "Hello, this is the unstructured data"
-  }
+  "@class" : "srl.graffiti.messages.sketch.GetMyPositionedSketchesRequest"
 }
 //RESPONSE
 {
-  "@class" : "srl.graffiti.messages.sketch.SavePositionedSketchResponse",
+  "@class" : "srl.graffiti.messages.sketch.GetMyPositionedSketchesResponse",
   "success" : false,
-  "positionedSketch" : {
+  "positionedSketches" : [ {
     "@class" : "srl.graffiti.model.PositionedSketch",
-    "id" : "agxzcmwtZ3JhZmZpdGlyFgsSEFBvc2l0aW9uZWRTa2V0Y2gYRAw",
+    "id" : "agxzcmwtZ3JhZmZpdGlyFgsSEFBvc2l0aW9uZWRTa2V0Y2gYVQw",
     "sketch" : {
       "@type" : "Sketch",
-      "id" : "00000000-0001-4d3d-92c1-fe20b41220f8",
+      "id" : "00000000-0001-489d-92c6-38874dbe1cd0",
+      "attributes" : {
+      },
+      "style" : null,
       "contents" : [ {
         "@type" : "Stroke",
-        "id" : "00000000-0002-4d3d-92c1-fe20b4320120",
+        "id" : "00000000-0002-489d-92c6-38874dfaacb8",
+        "attributes" : {
+        },
+        "style" : null,
         "points" : [ {
           "@type" : "Point",
-          "id" : "00000000-0004-4d3d-92c1-fe20b4548510",
+          "id" : "00000000-0004-489d-92c6-38874e197f58",
+          "attributes" : {
+          },
+          "style" : null,
           "x" : 0.0,
           "y" : 0.0,
+          "pressure" : null,
+          "tiltX" : null,
+          "tiltY" : null,
           "time" : -1
         }, {
           "@type" : "Point",
-          "id" : "00000000-0006-4d3d-92c1-fe20b454cf48",
+          "id" : "00000000-0006-489d-92c6-38874e19c990",
+          "attributes" : {
+          },
+          "style" : null,
           "x" : 200.0,
           "y" : 0.0,
+          "pressure" : null,
+          "tiltX" : null,
+          "tiltY" : null,
           "time" : -1
         }, {
           "@type" : "Point",
-          "id" : "00000000-0008-4d3d-92c1-fe20b454db00",
+          "id" : "00000000-0008-489d-92c6-38874e19d930",
+          "attributes" : {
+          },
+          "style" : null,
           "x" : 100.0,
           "y" : 100.0,
+          "pressure" : null,
+          "tiltX" : null,
+          "tiltY" : null,
           "time" : -1
-        } ]
+        } ],
+        "interpretations" : [ ],
+        "segmentations" : [ ],
+        "parent" : null
       } ]
     },
     "latitude" : 90.0,
     "longitude" : 90.0,
-    "altitude" : 0.0,
-    "imageURL" : "http://127.0.0.1:8888/_ah/img/R_UGXeeunzRBsIu2ky38IQ",
-    "ownerName" : "eyce9000",
+    "imageURL" : "http://127.0.0.1:8888/_ah/img/mEhmNbQ-wEJWqD-oUK-NrQ",
+    "ownerName" : "test",
     "permissions" : "Private",
-    "unstructuredData" : "Hello, this is the unstructured data"
-  }
+    "unstructuredData" : "Hello, this is the unstructured data",
+    "timestamp" : 1352830892650,
+    "jdoDetachedState" : [ {
+      "@type" : "javax.jdo.identity.StringIdentity",
+      "targetClassName" : "srl.graffiti.model.PositionedSketch",
+      "hashCode" : 2101707891,
+      "keyAsObject" : "agxzcmwtZ3JhZmZpdGlyFgsSEFBvc2l0aW9uZWRTa2V0Y2gYVQw"
+    }, null, {
+      "@type" : "java.util.BitSet",
+      "words" : [ 1023 ]
+    }, {
+      "@type" : "java.util.BitSet",
+      "words" : [ 0 ]
+    } ]
+  } ]
+}
+//REQUEST
+{
+  "@class" : "srl.graffiti.messages.sketch.GetPublicPositionedSketchesRequest"
+}
+//RESPONSE
+{
+  "@class" : "srl.graffiti.messages.sketch.GetPublicPositionedSketchesResponse",
+  "success" : false,
+  "positionedSketches" : [ ]
 }

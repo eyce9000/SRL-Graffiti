@@ -29,6 +29,10 @@ import srl.graffiti.GraffitiSerialization;
 import srl.graffiti.messages.images.ImageCreatedResponse;
 import srl.graffiti.messages.images.ImageGetSessionRequest;
 import srl.graffiti.messages.images.ImageGetSessionResponse;
+import srl.graffiti.messages.sketch.GetMyPositionedSketchesRequest;
+import srl.graffiti.messages.sketch.GetMyPositionedSketchesResponse;
+import srl.graffiti.messages.sketch.GetPublicPositionedSketchesRequest;
+import srl.graffiti.messages.sketch.GetPublicPositionedSketchesResponse;
 import srl.graffiti.messages.sketch.SavePositionedSketchRequest;
 import srl.graffiti.messages.sketch.SavePositionedSketchResponse;
 import srl.graffiti.model.PositionedSketch;
@@ -113,6 +117,22 @@ public class TestApplication {
 		SavePositionedSketchResponse saveResponse = client.sendRequest(new SavePositionedSketchRequest(posSketch),SavePositionedSketchResponse.class);
 		posSketch = saveResponse.getPositionedSketch();
 		System.out.println("Pos Sketch Id: "+posSketch.getId());
+		
+		posSketch.setId(null);
+		posSketch.setPermissions(Permission.Public);
+		posSketch.setUnstructuredData("Unstructured 2");
+		client.sendRequest(new SavePositionedSketchRequest(posSketch));
+		
+		
+		GetMyPositionedSketchesResponse mySketchesResponse = client.sendRequest(new GetMyPositionedSketchesRequest(),GetMyPositionedSketchesResponse.class);
+		for(PositionedSketch myPosSketch:mySketchesResponse.getPositionedSketches()){
+			System.out.println("My Sketches - ID="+myPosSketch.getId());
+		}
+		
+		GetPublicPositionedSketchesResponse publicSketchesResponse = client.sendRequest(new GetPublicPositionedSketchesRequest(),GetPublicPositionedSketchesResponse.class);
+		for(PositionedSketch myPosSketch:publicSketchesResponse.getPositionedSketches()){
+			System.out.println("Public Sketches - ID="+myPosSketch.getId());
+		}
 	}
 
 }
