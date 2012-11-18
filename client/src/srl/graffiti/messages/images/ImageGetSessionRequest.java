@@ -35,7 +35,9 @@ package srl.graffiti.messages.images;
  *  
  *******************************************************************************/
 
-import com.grl.json.messages.Request;
+
+import srl.distributed.messages.Request;
+import srl.distributed.messages.Response;
 public class ImageGetSessionRequest extends Request{
 
 	

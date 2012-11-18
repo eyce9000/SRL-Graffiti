@@ -1,8 +1,8 @@
 package srl.graffiti.messages.sketch;
 
-import com.grl.json.ServiceContext;
-import com.grl.json.messages.Request;
-import com.grl.json.messages.Response;
+
+import srl.distributed.messages.Request;
+import srl.distributed.messages.Response;
 
 
 public class GetMyPositionedSketchesRequest extends Request {

@@ -2,7 +2,8 @@ package srl.graffiti.messages.sketch;
 
 import srl.graffiti.model.PositionedSketch;
 
-import com.grl.json.messages.Response;
+import srl.distributed.messages.Request;
+import srl.distributed.messages.Response;
 
 public class SavePositionedSketchResponse extends Response {
 	private PositionedSketch positionedSketch;

@@ -4,7 +4,8 @@ import java.util.Collection;
 
 import srl.graffiti.model.Image;
 
-import com.grl.json.messages.Response;
+import srl.distributed.messages.Request;
+import srl.distributed.messages.Response;
 
 public class GetMyImagesResponse extends Response{
 	private Collection<Image> images;

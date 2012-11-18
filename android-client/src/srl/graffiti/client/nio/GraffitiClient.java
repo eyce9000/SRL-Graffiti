@@ -5,6 +5,9 @@ import java.net.URL;
 import java.util.Collection;
 import java.util.List;
 
+import srl.distributed.client.Client;
+import srl.distributed.messages.Request;
+import srl.distributed.messages.Response;
 import srl.graffiti.client.ImageUploader;
 import srl.graffiti.client.LoginHelper;
 import srl.graffiti.messages.images.GetMyImagesRequest;
@@ -24,10 +27,6 @@ import srl.graffiti.model.PositionedSketch;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.grl.json.client.Client;
-import com.grl.json.client.exceptions.ClientException;
-import com.grl.json.messages.Request;
-import com.grl.json.messages.Response;
 
 public class GraffitiClient {
 	private Client client;
@@ -46,10 +45,6 @@ public class GraffitiClient {
 		this.isTestServer = isTestServer;
 	}
 	
-	private void sendRequests(Callback<List<Response>> successCallback, Request... requests){
-		RequestTask task = new RequestTask(client,successCallback);
-		task.execute(requests);
-	}
 	
 	/**
 	 * This method must be called first. 

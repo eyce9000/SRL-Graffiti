@@ -25,6 +25,8 @@ import srl.core.serialization.TypeAttributeMixin;
 import srl.core.sketch.Point;
 import srl.core.sketch.Sketch;
 import srl.core.sketch.Stroke;
+import srl.distributed.client.Client;
+import srl.distributed.messages.Response;
 import srl.graffiti.GraffitiSerialization;
 import srl.graffiti.messages.images.ImageCreatedResponse;
 import srl.graffiti.messages.images.ImageGetSessionRequest;
@@ -39,11 +41,6 @@ import srl.graffiti.model.PositionedSketch;
 import srl.graffiti.model.PositionedSketch.Permission;
 
 
-import com.grl.json.JSONMapperProvider;
-import com.grl.json.client.Client;
-import com.grl.json.messages.Request;
-import com.grl.json.messages.Response;
-
 public class TestApplication {
 
 	/**
@@ -56,7 +53,7 @@ public class TestApplication {
 		if (test) {
 			client = new Client(new URL("http://localhost:8888/graffiti?key=srl"));
 			client.setMessageLoggingEnabled(new File("test.log.json"));
-			client.setJSONMapperProvider(GraffitiSerialization.mapperProvider);
+			client.setObjectMapperProvider(new GraffitiSerialization());
 			token = LoginHelper.loginToLocalhost(client.getHttpClient(),
 					"test@gmail.com", false, "http://localhost:8888/");
 		} else {
@@ -66,10 +63,6 @@ public class TestApplication {
 			token = LoginHelper.loginToGoogleAppEngine(client.getHttpClient(),
 					"username@gmail.com", "google_password",
 					"https://srl-graffiti.appspot.com/graffiti");
-		}
-
-		if (!client.testConnection()) {
-			return;
 		}
 
 

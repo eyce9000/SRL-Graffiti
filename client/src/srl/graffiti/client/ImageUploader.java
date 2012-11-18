@@ -15,12 +15,10 @@ import org.apache.http.entity.mime.content.FileBody;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import srl.distributed.messages.ErrorResponse;
+import srl.distributed.messages.Response;
 import srl.graffiti.GraffitiSerialization;
 
-import com.grl.json.JSONMapperProvider;
-import com.grl.json.client.Client;
-import com.grl.json.messages.ErrorResponse;
-import com.grl.json.messages.Response;
 
 public class ImageUploader {
 	private static Logger log = LoggerFactory.getLogger("ImageUploader");
@@ -103,7 +101,7 @@ public class ImageUploader {
 			int serverResponseCode = connection.getResponseCode();
 			log.info("Image upload response: "+serverResponseCode);
 			String serverResponseMessage = connection.getResponseMessage();
-			Response response = GraffitiSerialization.mapperProvider.buildMapper().readValue(
+			Response response = new GraffitiSerialization().getMapper().readValue(
 					connection.getInputStream(), Response.class);
 
 			fileInputStream.close();

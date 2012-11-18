@@ -4,7 +4,8 @@ import java.util.Collection;
 
 import srl.graffiti.model.PositionedSketch;
 
-import com.grl.json.messages.Response;
+import srl.distributed.messages.Request;
+import srl.distributed.messages.Response;
 
 public class GetPublicPositionedSketchesResponse extends Response {
 	private Collection<PositionedSketch> positionedSketches;

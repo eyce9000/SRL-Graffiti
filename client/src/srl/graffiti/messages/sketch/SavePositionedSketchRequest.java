@@ -1,7 +1,7 @@
 package srl.graffiti.messages.sketch;
 
-import com.grl.json.messages.Request;
-import com.grl.json.messages.Response;
+import srl.distributed.messages.Request;
+import srl.distributed.messages.Response;
 
 import srl.graffiti.model.PositionedSketch;
 

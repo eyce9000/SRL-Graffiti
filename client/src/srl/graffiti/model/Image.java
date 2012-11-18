@@ -1,5 +1,7 @@
 package srl.graffiti.model;
 
+import srl.distributed.messages.SerializableObject;
+
 /*******************************************************************************
  *  Revision History:<br>
  *  George R. Lucchese - File created
@@ -35,7 +37,6 @@ package srl.graffiti.model;
  *  
  *******************************************************************************/
 
-import com.grl.json.SerializableObject;
 
 public class Image extends SerializableObject{
 	private String imageURL;

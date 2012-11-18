@@ -38,8 +38,8 @@ package srl.graffiti.model;
 
 import srl.core.sketch.Point;
 import srl.core.sketch.Sketch;
+import srl.distributed.messages.SerializableObject;
 
-import com.grl.json.SerializableObject;
 
 public class PositionedSketch extends SerializableObject{
 	public static enum Permission{Public,Private};

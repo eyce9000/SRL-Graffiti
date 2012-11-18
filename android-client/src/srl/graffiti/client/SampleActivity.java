@@ -37,7 +37,6 @@ package srl.graffiti.client;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import srl.graffiti.client.ui.WebDialog;
 import android.os.Bundle;
 import android.accounts.Account;
 import android.accounts.AccountManager;
@@ -51,8 +50,6 @@ import android.support.v4.app.NavUtils;
 
 public class SampleActivity extends Activity {
 	
-	
-	WebDialog webDialog;
 	Button uploadButton;
 	
     @Override
@@ -66,7 +63,6 @@ public class SampleActivity extends Activity {
 		        
 			}
         });
-        webDialog = new WebDialog(this);
     }
 
     @Override

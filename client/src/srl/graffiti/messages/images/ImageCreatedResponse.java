@@ -34,7 +34,9 @@ package srl.graffiti.messages.images;
  *  </pre>
  *  
  *******************************************************************************/
-import com.grl.json.messages.Response;
+
+import srl.distributed.messages.Request;
+import srl.distributed.messages.Response;
 
 public class ImageCreatedResponse extends Response {
 	private String imageURL;

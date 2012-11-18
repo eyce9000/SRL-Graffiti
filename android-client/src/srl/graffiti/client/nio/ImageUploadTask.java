@@ -41,23 +41,23 @@ import java.io.FileInputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import srl.distributed.ObjectMapperProvider;
+import srl.distributed.messages.Response;
+import srl.graffiti.GraffitiSerialization;
 import srl.graffiti.client.ImageUploader;
 import srl.graffiti.client.UploadProgressListener;
 
-import com.grl.json.JSONMapperProvider;
-import com.grl.json.messages.ErrorResponse;
-import com.grl.json.messages.Response;
 
 import android.os.AsyncTask;
 import android.util.Log;
 
 public class ImageUploadTask extends AsyncTask<File, Double, Response> {
 	private String uploadUrl;
-	private JSONMapperProvider mapperProvider;
+	private ObjectMapperProvider mapperProvider;
 	private UploadProgressListener listener;
-	public ImageUploadTask(String uploadUrl, JSONMapperProvider mapperProvider){
+	public ImageUploadTask(String uploadUrl){
 		this.uploadUrl = uploadUrl;
-		this.mapperProvider = mapperProvider;
+		this.mapperProvider = new GraffitiSerialization();
 		listener = new UploadProgressListener(){
 
 			@Override
