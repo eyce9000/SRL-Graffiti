@@ -1,12 +1,7 @@
-war/WEB-INF/appengine-generated/*
+server/war/WEB-INF/appengine-generated/*
 
-war/WEB-INF/classes/*
+server/war/WEB-INF/classes/*
 *.DS_Store
-
-*.class
-bin
 *.class
 gen
-bin
-/server/war/WEB-INF/classes
 bin

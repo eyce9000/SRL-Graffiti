@@ -1,9 +1,10 @@
 package srl.graffiti.messages.images;
 
 import com.google.appengine.api.users.User;
-import com.grl.json.ServiceContext;
-import com.grl.json.messages.Response;
 
+import srl.distributed.messages.Request;
+import srl.distributed.messages.Response;
+import srl.distributed.server.ServiceContext;
 import srl.graffiti.managers.ImageManager;
 import srl.graffiti.messages.AuthorizedRequest;
 

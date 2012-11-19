@@ -4,8 +4,9 @@ import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 
+import srl.distributed.messages.SerializableObject;
+
 import com.google.appengine.api.users.User;
-import com.grl.json.SerializableObject;
 
 @PersistenceCapable
 public class UserInfo extends SerializableObject{

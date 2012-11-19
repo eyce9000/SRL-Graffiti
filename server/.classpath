@@ -9,5 +9,6 @@
 	<classpathentry kind="lib" path="war/WEB-INF/lib/srl.core-0.1.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/srl.distributed-0.1.jar"/>
 	<classpathentry kind="con" path="com.google.appengine.eclipse.core.GAE_CONTAINER/App Engine (5)/v2"/>
+	<classpathentry kind="con" path="com.google.appengine.eclipse.core.GAE_CONTAINER/App Engine/v2"/>
 	<classpathentry kind="output" path="war/WEB-INF/classes"/>
 </classpath>

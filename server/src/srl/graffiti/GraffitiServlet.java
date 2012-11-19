@@ -35,19 +35,23 @@ package srl.graffiti;
  *  
  *******************************************************************************/
 import java.io.IOException;
+
+import javax.servlet.ServletConfig;
 import javax.servlet.http.*;
 
 import org.codehaus.jackson.map.ObjectMapper;
 
+import srl.distributed.ObjectMapperProvider;
+import srl.distributed.server.JsonRequestServlet;
+
 import com.google.appengine.api.users.User;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
-import com.grl.json.server.JsonRequestServlet;
 
 @SuppressWarnings("serial")
 public class GraffitiServlet extends JsonRequestServlet {
 	@Override
-	public ObjectMapper buildMapper(){
-		return GraffitiSerialization.mapperProvider.buildMapper();
+	public ObjectMapperProvider getObjectMapperProvider(){
+		return new GraffitiSerialization();
 	}
 }

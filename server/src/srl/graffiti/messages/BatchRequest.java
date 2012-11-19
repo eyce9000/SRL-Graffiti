@@ -5,10 +5,10 @@ import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
-
-import com.grl.json.ServiceContext;
-import com.grl.json.messages.Response;
-import com.grl.json.server.ServerRequest;
+import srl.distributed.messages.Response;
+import srl.distributed.messages.UnauthorizedResponse;
+import srl.distributed.server.ServerRequest;
+import srl.distributed.server.ServiceContext;
 
 public class BatchRequest extends PrivateRequest {
 	private List<ServerRequest> requests;

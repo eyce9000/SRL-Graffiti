@@ -35,9 +35,9 @@ package srl.graffiti.messages.images;
  *  
  *******************************************************************************/
 
-import com.grl.json.messages.ErrorResponse;
-import com.grl.json.messages.Request;
-import com.grl.json.messages.Response;
+import srl.distributed.messages.Request;
+import srl.distributed.messages.Response;
+import srl.distributed.server.ServiceContext;
 public class ImageGetSessionResponse extends Response {
 	private String sessionURL;
 	

@@ -51,7 +51,8 @@ import srl.core.sketch.Sketch;
 import srl.graffiti.GraffitiSerialization;
 
 import com.google.appengine.api.datastore.Text;
-import com.grl.json.SerializableObject;
+
+import srl.distributed.messages.SerializableObject;
 
 @PersistenceCapable(detachable="true")
 public class PositionedSketch extends SerializableObject{
@@ -161,7 +162,7 @@ public class PositionedSketch extends SerializableObject{
 	public Sketch getSketch() throws Exception{
 		if(sketch == null)
 			return null;
-		return GraffitiSerialization.mapperProvider.buildMapper().readValue(sketch.getValue(), Sketch.class);
+		return new GraffitiSerialization().getMapper().readValue(sketch.getValue(), Sketch.class);
 	}
 	/**
 	 * @param sketch the sketch to set
@@ -169,7 +170,7 @@ public class PositionedSketch extends SerializableObject{
 	@JsonProperty
 	public void setSketch(Sketch sketch) throws Exception{
 		this.sketch = new Text(
-				GraffitiSerialization.mapperProvider.buildMapper().writeValueAsString(sketch)
+				new GraffitiSerialization().getMapper().writeValueAsString(sketch)
 		);
 	}
 	/**

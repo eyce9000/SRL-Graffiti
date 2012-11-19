@@ -44,11 +44,10 @@ import com.google.appengine.api.oauth.OAuthServiceFactory;
 import com.google.appengine.api.users.User;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
-import com.grl.json.ServiceContext;
-import com.grl.json.messages.Request;
-import com.grl.json.messages.Response;
-import com.grl.json.messages.UnauthorizedResponse;
-
+import srl.distributed.messages.Response;
+import srl.distributed.messages.UnauthorizedResponse;
+import srl.distributed.server.ServerRequest;
+import srl.distributed.server.ServiceContext;
 public abstract class AuthorizedRequest extends PrivateRequest {
 
 	@Override

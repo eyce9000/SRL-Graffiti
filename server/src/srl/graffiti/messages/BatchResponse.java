@@ -3,8 +3,10 @@ package srl.graffiti.messages;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import com.grl.json.messages.Response;
+import srl.distributed.messages.Response;
+import srl.distributed.messages.UnauthorizedResponse;
+import srl.distributed.server.ServerRequest;
+import srl.distributed.server.ServiceContext;
 
 public class BatchResponse extends Response{
 

@@ -75,7 +75,7 @@ public class UploadServlet extends HttpServlet {
 			Map<String, List<BlobKey>> blobs = blobstoreService.getUploads(req);
 			BlobKey blobKey = blobs.get("newImage").get(0);
 
-			ObjectMapper mapper = GraffitiSerialization.mapperProvider.buildMapper();
+			ObjectMapper mapper = new GraffitiSerialization().getMapper();
 			
 			Image image = ImageManager.createImage(blobKey, user);
 

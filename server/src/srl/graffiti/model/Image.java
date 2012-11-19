@@ -34,8 +34,7 @@ package srl.graffiti.model;
  *  </pre>
  *  
  *******************************************************************************/
-import javax.jdo.annotations.Extension;
-import javax.jdo.annotations.IdGeneratorStrategy;
+
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
@@ -43,7 +42,7 @@ import javax.jdo.annotations.PrimaryKey;
 import org.codehaus.jackson.annotate.JsonIgnore;
 
 import com.google.appengine.api.blobstore.BlobKey;
-import com.grl.json.SerializableObject;
+import srl.distributed.messages.SerializableObject;
 
 @PersistenceCapable(detachable="true")
 public class Image extends SerializableObject{

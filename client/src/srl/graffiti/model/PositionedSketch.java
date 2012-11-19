@@ -48,7 +48,7 @@ public class PositionedSketch extends SerializableObject{
 	
 	private Sketch sketch;
 
-	private double latitude, longitude, altitude;
+	private double latitude, longitude;
 
 	private String imageURL;
 
@@ -84,18 +84,7 @@ public class PositionedSketch extends SerializableObject{
 	public void setLongitude(double longitude) {
 		this.longitude = longitude;
 	}
-	/**
-	 * @return the altitude
-	 */
-	public double getAltitude() {
-		return altitude;
-	}
-	/**
-	 * @param altitude the altitude to set
-	 */
-	public void setAltitude(double altitude) {
-		this.altitude = altitude;
-	}
+
 	/**
 	 * @return the permissions
 	 */
