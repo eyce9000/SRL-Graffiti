@@ -60,7 +60,7 @@ public class ImageUploadTask extends AsyncTask<File, Double, Response> {
 		this.mapperProvider = new GraffitiSerialization();
 		listener = new UploadProgressListener(){
 
-			@Override
+			
 			public void onUploadProgress(File file, long uploadedBytes,
 					long totalBytes) {
 				ImageUploadTask.this.onProgressUpdate(((double)uploadedBytes)/((double)totalBytes));
