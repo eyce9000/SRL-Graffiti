@@ -37,10 +37,14 @@ package srl.graffiti.client;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import srl.graffiti.client.nio.Callback;
+import srl.graffiti.client.nio.GraffitiClient;
+
 import android.os.Bundle;
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.app.Activity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -49,27 +53,41 @@ import android.widget.Button;
 import android.support.v4.app.NavUtils;
 
 public class SampleActivity extends Activity {
-	
+
 	Button uploadButton;
-	
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sample);
-        uploadButton = (Button)findViewById(R.id.upload_button);
-        uploadButton.setOnClickListener(new OnClickListener(){
-			@Override
-			public void onClick(View v) {
-		        
-			}
-        });
-    }
+	GraffitiClient client;
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.activity_sample, menu);
-        return true;
-    }
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_sample);
+		uploadButton = (Button) findViewById(R.id.upload_button);
 
-    
+	}
+
+	public void startTest(View view) {
+		try {
+			Log.i("GraffitiClientTest", "Trying to run test");
+
+			SampleActivity.this.client = new GraffitiClient(new URL(
+					"http://192.168.1.115:8888/graffiti"), true);
+			client.logIn("test@gmail.com", "something",
+					new Callback<Boolean>() {
+						@Override
+						public void onCallback(Boolean data) {
+							Log.i("GraffitiClientTest", "Login Successful");
+						}
+					});
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			Log.e("GraffitiClientTest", "Error", e);
+		}
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.activity_sample, menu);
+		return true;
+	}
+
 }

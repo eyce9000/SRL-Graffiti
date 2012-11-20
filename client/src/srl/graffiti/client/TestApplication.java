@@ -54,7 +54,7 @@ public class TestApplication {
 			client = new Client(new URL("http://localhost:8888/graffiti?key=srl"));
 			client.setMessageLoggingEnabled(new File("test.log.json"));
 			client.setObjectMapperProvider(new GraffitiSerialization());
-			token = LoginHelper.loginToLocalhost(client.getHttpClient(),
+			token = LoginHelper.loginToDevServer(client.getHttpClient(),"localhost",8888,
 					"test@gmail.com", false, "http://localhost:8888/");
 		} else {
 			client = new Client(new URL(

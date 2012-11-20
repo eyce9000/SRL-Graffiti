@@ -135,13 +135,15 @@ public class LoginHelper {
 	 * http://e-mentality.blogspot.com/2011/12/app-engine-sdk-httpclient.html
 	 */
 
-	public static String loginToLocalhost(DefaultHttpClient client,
+	public static String loginToDevServer(DefaultHttpClient client,String hostname,int port,
 			String username, boolean asAdmin, String redirectUrl)
 			throws Exception {
 		client.getParams().setBooleanParameter(
 				ClientPNames.HANDLE_REDIRECTS, false);
 
-		HttpPost httpPost = new HttpPost("http://localhost:8888/_ah/login");
+		String url="http://"+hostname+":"+port+"/_ah/login";
+		
+		HttpPost httpPost = new HttpPost(url);
 		httpPost.setHeader("Content-Type", "application/x-www-form-urlencoded");
 		String email = URLEncoder.encode(username, "UTF-8");
 		httpPost.setEntity(new StringEntity("email=" + email + "&continue="

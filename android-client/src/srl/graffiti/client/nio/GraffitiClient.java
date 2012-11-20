@@ -64,7 +64,8 @@ public class GraffitiClient {
 						token = LoginHelper.loginToGoogleAppEngine(client.getHttpClient(), username, password, serverURL.toExternalForm());
 					}
 					else{
-						token = LoginHelper.loginToLocalhost(client.getHttpClient(), username, false, serverURL.toExternalForm());
+						token = LoginHelper.loginToDevServer(client.getHttpClient(), GraffitiClient.this.serverURL.getHost(),
+								GraffitiClient.this.serverURL.getPort(),username, false, serverURL.toExternalForm());
 					}
 					if(token!=null){
 						return true;
@@ -79,7 +80,7 @@ public class GraffitiClient {
 			protected void onPostExecute(Boolean success){
 				completionCallback.onCallback(success);
 			}
-		}.equals(null);
+		}.execute(null);
 	}
 	
 	/**
