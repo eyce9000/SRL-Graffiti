@@ -66,19 +66,15 @@ public class SampleActivity extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);		
-
-		sketchCanvas = new EditSketch(this.getApplicationContext());
-		sketchCanvas.setEnabled(true);
 		
 		setContentView(R.layout.activity_sample);
-
-		uploadButton = (Button) findViewById(R.id.upload_button);		
-		screenLayout = (RelativeLayout) findViewById(R.id.screen_layout);
+		
+		sketchCanvas = (EditSketch)findViewById(R.id.edit_sketch);
+		sketchCanvas.setEnabled(true);
+		
 		
 		RelativeLayout.LayoutParams layoutParameters = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.FILL_PARENT
 				,RelativeLayout.LayoutParams.FILL_PARENT);
-		screenLayout.addView(sketchCanvas, 1, layoutParameters);
-		uploadButton.bringToFront();
 			
 	}
 
@@ -106,7 +102,6 @@ public class SampleActivity extends Activity {
 
 			SampleActivity.this.client = new GraffitiClient(new URL(
 					"http://192.168.1.115:8888/graffiti"), true);
-			SampleActivity.this.client = new GraffitiClient(new URL("http://192.168.1.115:8888/graffiti"), true);
 			
 			client.logIn("test@gmail.com", "something",
 					new Callback<Boolean>() {

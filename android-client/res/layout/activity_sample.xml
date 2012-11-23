@@ -3,9 +3,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" 
     android:id="@+id/screen_layout" >
-
+<srl.gui.android.EditSketch
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/edit_sketch"
+    />
     <Button
-        android:id="@+id/upload_button"
+        android:id="@+id/login_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
