@@ -81,6 +81,13 @@ public class UploadServlet extends HttpServlet {
 
 			System.out.println("Stored image: "+image.getImageURL()+" uploaded by "+user.getUserId());
 			
+			if(GraffitiServlet.isDevelopment){
+				String ip = req.getLocalAddr();
+				String imageURL = image.getImageURL();
+				imageURL = imageURL.replaceAll("//.*:8888","//"+ip+":8888");
+				image.setImageURL(imageURL);
+			}
+			
 			mapper.writeValue(res.getOutputStream(), new ImageCreatedResponse(
 					image.getImageURL()));
 		}

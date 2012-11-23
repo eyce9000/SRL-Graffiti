@@ -37,6 +37,7 @@ package srl.graffiti;
 import java.io.IOException;
 
 import javax.servlet.ServletConfig;
+import javax.servlet.ServletException;
 import javax.servlet.http.*;
 
 import org.codehaus.jackson.map.ObjectMapper;
@@ -50,8 +51,17 @@ import com.google.appengine.api.users.UserServiceFactory;
 
 @SuppressWarnings("serial")
 public class GraffitiServlet extends JsonRequestServlet {
+	public static boolean isDevelopment;
+	
 	@Override
 	public ObjectMapperProvider getObjectMapperProvider(){
 		return new GraffitiSerialization();
+	}
+	@Override
+	public void init() throws ServletException{
+		super.init();
+		isDevelopment = getServletContext().getServerInfo().contains("Development");
+		if(isDevelopment)
+			System.out.println("Starting server in Development Mode");
 	}
 }

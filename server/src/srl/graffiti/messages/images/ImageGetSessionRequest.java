@@ -34,8 +34,11 @@ package srl.graffiti.messages.images;
  *  </pre>
  *  
  *******************************************************************************/
+import java.net.URL;
+
 import javax.servlet.http.HttpSession;
 
+import srl.graffiti.GraffitiServlet;
 import srl.graffiti.messages.AuthorizedRequest;
 
 import com.google.appengine.api.blobstore.BlobstoreService;
@@ -49,7 +52,12 @@ public class ImageGetSessionRequest extends AuthorizedRequest{
 	@Override
 	public Response performAuthorizedService(ServiceContext ctx, User user) {
 		BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService();
-		return new ImageGetSessionResponse(blobstoreService.createUploadUrl("/uploads"));
+		String uploadURL = blobstoreService.createUploadUrl("/uploads");
+		if(GraffitiServlet.isDevelopment){
+			String ip = ctx.getRequest().getLocalAddr();
+			uploadURL = uploadURL.replaceAll("//.*:8888","//"+ip+":8888");
+		}
+		return new ImageGetSessionResponse(uploadURL);
 	}
 	
 }
