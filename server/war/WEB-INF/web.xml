@@ -2,6 +2,7 @@
 	<servlet>
 		<servlet-name>Graffiti</servlet-name>
 		<servlet-class>srl.graffiti.GraffitiServlet</servlet-class>
+  		<load-on-startup>1</load-on-startup>
 	</servlet>
 	
 	<servlet>
