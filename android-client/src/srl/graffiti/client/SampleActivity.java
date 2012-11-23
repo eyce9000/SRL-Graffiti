@@ -53,6 +53,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 import android.support.v4.app.NavUtils;
 
 public class SampleActivity extends Activity {
@@ -87,7 +88,14 @@ public class SampleActivity extends Activity {
 		client.uploadImage(imageFile, new Callback<String>(){
 			@Override
 			public void onCallback(String url) {
-				Log.i("GraffitiClientTest", "Uploaded image. URL for image:"+url);
+				if(url!=null){
+					Log.i("GraffitiClientTest", "Uploaded image. URL for image:"+url);
+					Toast.makeText(SampleActivity.this, "Image Uploaded Successfully", Toast.LENGTH_SHORT).show();
+				}
+				else{
+					Log.i("GraffitiClientTest", "Image Upload Failed");
+					Toast.makeText(SampleActivity.this, "Image Upload Failed", Toast.LENGTH_SHORT).show();
+				}
 			}
 		});
 	}
@@ -104,17 +112,17 @@ public class SampleActivity extends Activity {
 					new Callback<Boolean>() {
 						@Override
 						public void onCallback(Boolean data) {
-				new Callback<Boolean>() {
-					@Override
-					public void onCallback(Boolean data) {
-						if(data){
-							Log.i("GraffitiClientTest", "Login Successful");
+							if(data){
+								Log.i("GraffitiClientTest", "Login Successful");
+								Toast.makeText(SampleActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
+							}
+							else{
+								Log.i("GraffitiClientTest", "Login Failed");
+								Toast.makeText(SampleActivity.this, "Login Failed", Toast.LENGTH_SHORT).show();
+							}
 						}
-					});
-						else
-							Log.i("GraffitiClientTest", "Login Failed");
-				}
-			});
+					}
+			);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			Log.e("GraffitiClientTest", "Error", e);
