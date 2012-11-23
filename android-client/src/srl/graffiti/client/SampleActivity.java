@@ -34,6 +34,7 @@ package srl.graffiti.client;
  *  </pre>
  *  
  *******************************************************************************/
+import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -65,19 +66,34 @@ public class SampleActivity extends Activity {
 
 	}
 
+	public void uploadImageTest(View view){
+		File imageFile = new File("/mnt/sdcard/DCIM/Camera/").listFiles()[0];
+		
+		client.uploadImage(imageFile, new Callback<String>(){
+			@Override
+			public void onCallback(String url) {
+				Log.i("GraffitiClientTest", "Uploaded image. URL for image:"+url);
+			}
+		});
+	}
+	
 	public void startTest(View view) {
 		try {
 			Log.i("GraffitiClientTest", "Trying to run test");
 
-			SampleActivity.this.client = new GraffitiClient(new URL(
-					"http://192.168.1.115:8888/graffiti"), true);
+			SampleActivity.this.client = new GraffitiClient(new URL("http://192.168.1.115:8888/graffiti"), true);
+			
 			client.logIn("test@gmail.com", "something",
-					new Callback<Boolean>() {
-						@Override
-						public void onCallback(Boolean data) {
+				new Callback<Boolean>() {
+					@Override
+					public void onCallback(Boolean data) {
+						if(data){
 							Log.i("GraffitiClientTest", "Login Successful");
 						}
-					});
+						else
+							Log.i("GraffitiClientTest", "Login Failed");
+				}
+			});
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			Log.e("GraffitiClientTest", "Error", e);

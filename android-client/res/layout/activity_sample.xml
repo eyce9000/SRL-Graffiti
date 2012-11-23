@@ -21,6 +21,15 @@
         android:layout_marginRight="14dp"
         android:layout_marginTop="15dp"
         android:onClick="startTest"
+        android:text="Log In" />
+<Button
+        android:id="@+id/upload_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="14dp"
+        android:layout_marginTop="80dp"
+        android:onClick="uploadImageTest"
         android:text="Begin Upload" />
-
 </RelativeLayout>
