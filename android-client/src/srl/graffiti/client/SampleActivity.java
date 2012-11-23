@@ -40,6 +40,7 @@ import java.net.URL;
 
 import srl.graffiti.client.nio.Callback;
 import srl.graffiti.client.nio.GraffitiClient;
+import srl.gui.android.EditSketch;
 
 import android.os.Bundle;
 import android.accounts.Account;
@@ -51,19 +52,33 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.support.v4.app.NavUtils;
 
 public class SampleActivity extends Activity {
 
 	Button uploadButton;
 	GraffitiClient client;
-
+	RelativeLayout screenLayout;
+	EditSketch sketchCanvas;
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_sample);
-		uploadButton = (Button) findViewById(R.id.upload_button);
+		super.onCreate(savedInstanceState);		
 
+		sketchCanvas = new EditSketch(this.getApplicationContext());
+		sketchCanvas.setEnabled(true);
+		
+		setContentView(R.layout.activity_sample);
+
+		uploadButton = (Button) findViewById(R.id.upload_button);		
+		screenLayout = (RelativeLayout) findViewById(R.id.screen_layout);
+		
+		RelativeLayout.LayoutParams layoutParameters = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.FILL_PARENT
+				,RelativeLayout.LayoutParams.FILL_PARENT);
+		screenLayout.addView(sketchCanvas, 1, layoutParameters);
+		uploadButton.bringToFront();
+			
 	}
 
 	public void uploadImageTest(View view){
@@ -81,15 +96,21 @@ public class SampleActivity extends Activity {
 		try {
 			Log.i("GraffitiClientTest", "Trying to run test");
 
+			SampleActivity.this.client = new GraffitiClient(new URL(
+					"http://192.168.1.115:8888/graffiti"), true);
 			SampleActivity.this.client = new GraffitiClient(new URL("http://192.168.1.115:8888/graffiti"), true);
 			
 			client.logIn("test@gmail.com", "something",
+					new Callback<Boolean>() {
+						@Override
+						public void onCallback(Boolean data) {
 				new Callback<Boolean>() {
 					@Override
 					public void onCallback(Boolean data) {
 						if(data){
 							Log.i("GraffitiClientTest", "Login Successful");
 						}
+					});
 						else
 							Log.i("GraffitiClientTest", "Login Failed");
 				}
