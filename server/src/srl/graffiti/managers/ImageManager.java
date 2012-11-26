@@ -48,11 +48,14 @@ public class ImageManager {
 	
 	public static Collection<Image> getMyImages(User user){
 		PersistenceManager pm = PMF.get().getPersistenceManager();
+		
 		Query q = pm.newQuery(Image.class);
-		q.setFilter("userId=myUserId");
+		q.setFilter("ownerId==myUserId");
 		q.declareParameters("String myUserId");
-		List<Image> images = (List<Image>)q.execute(user.getUserId());
+		Collection<Image> images = (Collection<Image>)q.execute(user.getUserId());
+		images = pm.detachCopyAll(images);
 		pm.close();
-		return pm.detachCopyAll(images);
+		return images;
+
 	}
 }

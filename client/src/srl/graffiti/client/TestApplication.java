@@ -28,6 +28,8 @@ import srl.core.sketch.Stroke;
 import srl.distributed.client.Client;
 import srl.distributed.messages.Response;
 import srl.graffiti.GraffitiSerialization;
+import srl.graffiti.messages.images.GetMyImagesRequest;
+import srl.graffiti.messages.images.GetMyImagesResponse;
 import srl.graffiti.messages.images.ImageCreatedResponse;
 import srl.graffiti.messages.images.ImageGetSessionRequest;
 import srl.graffiti.messages.images.ImageGetSessionResponse;
@@ -37,6 +39,7 @@ import srl.graffiti.messages.sketch.GetPublicPositionedSketchesRequest;
 import srl.graffiti.messages.sketch.GetPublicPositionedSketchesResponse;
 import srl.graffiti.messages.sketch.SavePositionedSketchRequest;
 import srl.graffiti.messages.sketch.SavePositionedSketchResponse;
+import srl.graffiti.model.Image;
 import srl.graffiti.model.PositionedSketch;
 import srl.graffiti.model.PositionedSketch.Permission;
 
@@ -115,6 +118,11 @@ public class TestApplication {
 		posSketch.setPermissions(Permission.Public);
 		posSketch.setUnstructuredData("Unstructured 2");
 		client.sendRequest(new SavePositionedSketchRequest(posSketch));
+		
+		GetMyImagesResponse myImagesResponse = client.sendRequest(new GetMyImagesRequest(),GetMyImagesResponse.class);
+		for(Image image:myImagesResponse.getImages()){
+			System.out.println(image.getImageURL());
+		}
 		
 		
 		GetMyPositionedSketchesResponse mySketchesResponse = client.sendRequest(new GetMyPositionedSketchesRequest(),GetMyPositionedSketchesResponse.class);

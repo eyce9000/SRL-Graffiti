@@ -8,6 +8,7 @@ import java.util.List;
 import srl.distributed.client.Client;
 import srl.distributed.messages.Request;
 import srl.distributed.messages.Response;
+import srl.graffiti.GraffitiSerialization;
 import srl.graffiti.client.ImageUploader;
 import srl.graffiti.client.LoginHelper;
 import srl.graffiti.client.UploadProgressListener;
@@ -45,6 +46,7 @@ public class GraffitiClient {
 	 */
 	public GraffitiClient(URL serverURL, boolean isTestServer) {
 		client = new Client(serverURL);
+		client.setObjectMapperProvider(new GraffitiSerialization());
 		this.serverURL = serverURL;
 		this.isTestServer = isTestServer;
 	}
@@ -122,7 +124,6 @@ public class GraffitiClient {
 						
 						UploadProgressListener listener = new UploadProgressListener(){
 
-							@Override
 							public void onUploadProgress(File file,
 									long uploadedBytes, long totalBytes) {
 								Log.i("GraffitiClientTest","Uploading file. Completion "+uploadedBytes+"/"+totalBytes);

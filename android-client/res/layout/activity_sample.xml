@@ -1,13 +1,14 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/screen_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" 
-    android:id="@+id/screen_layout" >
-<srl.gui.android.EditSketch
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:id="@+id/edit_sketch"
-    />
+    android:layout_height="match_parent" >
+
+    <srl.gui.android.EditSketch
+        android:id="@+id/edit_sketch"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
     <Button
         android:id="@+id/login_button"
         android:layout_width="wrap_content"
@@ -18,14 +19,25 @@
         android:layout_marginTop="15dp"
         android:onClick="startTest"
         android:text="Log In" />
-<Button
+
+    <Button
         android:id="@+id/upload_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
+        android:layout_below="@id/login_button"
         android:layout_marginRight="14dp"
-        android:layout_marginTop="80dp"
         android:onClick="uploadImageTest"
         android:text="Begin Upload" />
+
+    <Button
+        android:id="@+id/retrieve_images"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/upload_button"
+        android:layout_marginRight="14dp"
+        android:onClick="retrieveMyImages"
+        android:text="Retrieve My Images" />
+
 </RelativeLayout>

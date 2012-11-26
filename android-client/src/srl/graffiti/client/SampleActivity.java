@@ -37,9 +37,11 @@ package srl.graffiti.client;
 import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Collection;
 
 import srl.graffiti.client.nio.Callback;
 import srl.graffiti.client.nio.GraffitiClient;
+import srl.graffiti.model.Image;
 import srl.gui.android.EditSketch;
 
 import android.os.Bundle;
@@ -79,10 +81,12 @@ public class SampleActivity extends Activity {
 	}
 
 	public void uploadImageTest(View view){
-		File imageFile = new File("/mnt/sdcard/DCIM/Camera/").listFiles()[0];
+		//TODO make sure to replace the file root with one that works on your phone
+		//File imageFile = new File("/mnt/sdcard/DCIM/Camera/").listFiles()[0];
+		
+		File imageFile = new File("/mnt/extSdCard/DCIM/Camera/").listFiles()[0];
 		
 		client.uploadImage(imageFile, new Callback<String>(){
-			@Override
 			public void onCallback(String url) {
 				if(url!=null){
 					Log.i("GraffitiClientTest", "Uploaded image. URL for image:"+url);
@@ -101,11 +105,10 @@ public class SampleActivity extends Activity {
 			Log.i("GraffitiClientTest", "Trying to run test");
 
 			SampleActivity.this.client = new GraffitiClient(new URL(
-					"http://192.168.1.115:8888/graffiti"), true);
+					"http://192.168.2.5:8888/graffiti"), true);
 			
 			client.logIn("test@gmail.com", "something",
 					new Callback<Boolean>() {
-						@Override
 						public void onCallback(Boolean data) {
 							if(data){
 								Log.i("GraffitiClientTest", "Login Successful");
@@ -124,6 +127,20 @@ public class SampleActivity extends Activity {
 		}
 	}
 
+	public void retrieveMyImages(View view){
+		client.getMyImages(new Callback<Collection<Image>>(){
+			public void onCallback(Collection<Image> data) {
+				if(data!=null && data.size()>0){
+					Log.i("GraffitiClientTest","Successfully retrieved my images ("+data.size()+")");
+					for(Image image:data){
+						Log.i("GraffitiClientTest","Image URL:"+image.getImageURL());
+					}
+				}
+			}
+		});
+	}
+	
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.activity_sample, menu);
