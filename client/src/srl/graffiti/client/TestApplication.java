@@ -52,13 +52,13 @@ public class TestApplication {
 	public static void main(String[] args) throws Exception {
 		Client client;
 		String token;
-		boolean test = false;
+		boolean test = true;
 		if (test) {
-			client = new Client(new URL("http://localhost:8888/graffiti"));
+			client = new Client(new URL("http://127.0.0.1:8888/graffiti"));
 			client.setMessageLoggingEnabled(new File("test.log.json"));
 			client.setObjectMapperProvider(new GraffitiSerialization());
-			token = LoginHelper.loginToDevServer(client.getHttpClient(),"localhost",8888,
-					"test@gmail.com", false, "http://localhost:8888/");
+			token = LoginHelper.loginToDevServer(client.getHttpClient(),"127.0.0.1",8888,
+					"test@gmail.com", false, "http://127.0.0.1:8888/");
 		} else {
 			client = new Client(new URL(
 					"https://srl-graffiti.appspot.com/graffiti"));
@@ -78,9 +78,9 @@ public class TestApplication {
 	public static void testUpload(Client client) {
 		String sessionURL = client.sendRequest(new ImageGetSessionRequest(),
 				ImageGetSessionResponse.class,30000).getSessionURL();
+		System.out.println("Uploading to "+sessionURL);
 
 		UploadProgressListener listener = new UploadProgressListener() {
-
 			@Override
 			public void onUploadProgress(File file, long uploadedBytes,
 					long totalBytes) {
@@ -89,7 +89,6 @@ public class TestApplication {
 				System.out.println(String.format("%s %d", file.getName(),
 						uploadedBytes));
 			}
-
 		};
 
 		Response response = ImageUploader.uploadFiles(client.getHttpClient(),sessionURL, listener,
@@ -106,8 +105,8 @@ public class TestApplication {
 		
 		PositionedSketch posSketch = new PositionedSketch();
 		posSketch.setSketch(sketch);
-		posSketch.setImageURL(imageURL);
-		posSketch.setLatitude(90);
+		//posSketch.setImageURL(imageURL);
+		posSketch.setLatitude(-90.0);
 		posSketch.setLongitude(90);
 		posSketch.setPermissions(Permission.Private);
 		posSketch.setUnstructuredData("Hello, this is the unstructured data");

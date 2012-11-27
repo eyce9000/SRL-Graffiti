@@ -43,8 +43,21 @@ public class ImageUploader {
 			HttpPost post = new HttpPost(uri);
 
 			MultipartEntity entity = new MultipartEntity();
-			ContentBody body = new FileBody(imageFile, "image/jpeg");
-			entity.addPart("userfile", body);
+			String[] parts = imageFile.getName().split("\\.");
+			String extension = parts[parts.length-1];
+			String mimeType = "";
+			if(extension.equalsIgnoreCase("png")){
+				mimeType="image/png";
+			}
+			else if(extension.equalsIgnoreCase("jpg") || extension.equalsIgnoreCase("jpeg")){
+				mimeType="image/jpeg";
+			}
+			else{
+				mimeType="image";
+			}
+			
+			ContentBody body = new FileBody(imageFile, mimeType);
+			entity.addPart("newImage", body);
 
 			post.setEntity(entity);
 			HttpResponse resp = client.execute(post);

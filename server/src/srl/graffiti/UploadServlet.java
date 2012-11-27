@@ -73,8 +73,10 @@ public class UploadServlet extends HttpServlet {
 				.getBlobstoreService();
 		UserService userService = UserServiceFactory.getUserService();
 		User user = userService.getCurrentUser();
-		log.info("Upload servlet active");
-		if (user != null) {
+		if (user==null){
+			log.info("Unauthenticated user tried to upload image");
+		}
+		else {
 			Map<String, List<BlobKey>> blobs = blobstoreService.getUploads(req);
 			BlobKey blobKey = null;
 			for(String key:blobs.keySet()){
