@@ -68,6 +68,11 @@ public class LoginHelper {
 			HttpResponse response = client.execute(post);
 
 			if (response.getStatusLine().getStatusCode() != 200) {
+				BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
+				String line;
+				while((line=reader.readLine())!=null){
+					System.out.println(line);
+				}
 				throw new Exception("Error obtaining SACSID");
 			}
 

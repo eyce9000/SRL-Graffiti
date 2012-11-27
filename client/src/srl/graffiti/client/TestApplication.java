@@ -52,9 +52,9 @@ public class TestApplication {
 	public static void main(String[] args) throws Exception {
 		Client client;
 		String token;
-		boolean test = true;
+		boolean test = false;
 		if (test) {
-			client = new Client(new URL("http://localhost:8888/graffiti?key=srl"));
+			client = new Client(new URL("http://localhost:8888/graffiti"));
 			client.setMessageLoggingEnabled(new File("test.log.json"));
 			client.setObjectMapperProvider(new GraffitiSerialization());
 			token = LoginHelper.loginToDevServer(client.getHttpClient(),"localhost",8888,
@@ -62,9 +62,10 @@ public class TestApplication {
 		} else {
 			client = new Client(new URL(
 					"https://srl-graffiti.appspot.com/graffiti"));
+			client.setObjectMapperProvider(new GraffitiSerialization());
 
 			token = LoginHelper.loginToGoogleAppEngine(client.getHttpClient(),
-					"username@gmail.com", "google_password",
+					"test@gmail.com", "password",
 					"https://srl-graffiti.appspot.com/graffiti");
 		}
 
@@ -75,7 +76,7 @@ public class TestApplication {
 
 	public static void testUpload(Client client) {
 		String sessionURL = client.sendRequest(new ImageGetSessionRequest(),
-				ImageGetSessionResponse.class).getSessionURL();
+				ImageGetSessionResponse.class,30000).getSessionURL();
 
 		UploadProgressListener listener = new UploadProgressListener() {
 

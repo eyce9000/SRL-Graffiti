@@ -107,7 +107,7 @@ public class SampleActivity extends Activity {
 			SampleActivity.this.client = new GraffitiClient(new URL(
 					"http://192.168.2.5:8888/graffiti"), true);
 			
-			client.logIn("test@gmail.com", "something",
+			client.logIn("test@gmail.com", "password",
 					new Callback<Boolean>() {
 						public void onCallback(Boolean data) {
 							if(data){

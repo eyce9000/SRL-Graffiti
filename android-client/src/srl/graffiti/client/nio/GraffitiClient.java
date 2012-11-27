@@ -116,7 +116,7 @@ public class GraffitiClient {
 				Log.i("GraffitiClientTest", "Uploading file "+params[0].getPath());
 				try {
 					
-					Response response = client.sendRequest(new ImageGetSessionRequest());
+					Response response = client.sendRequest(new ImageGetSessionRequest(),30000);
 					
 					if (response instanceof ImageGetSessionResponse) {
 						String sessionURL = ((ImageGetSessionResponse) response)

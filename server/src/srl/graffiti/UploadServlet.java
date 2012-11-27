@@ -37,6 +37,7 @@ package srl.graffiti;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Logger;
 
 import javax.jdo.PersistenceManager;
 import javax.servlet.ServletException;
@@ -63,33 +64,53 @@ import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 
 public class UploadServlet extends HttpServlet {
-	private BlobstoreService blobstoreService = BlobstoreServiceFactory
-			.getBlobstoreService();
+	
+    private static final Logger log = Logger.getLogger(UploadServlet.class.getName());
 
 	public void doPost(HttpServletRequest req, HttpServletResponse res)
 			throws ServletException, IOException {
+		BlobstoreService blobstoreService = BlobstoreServiceFactory
+				.getBlobstoreService();
 		UserService userService = UserServiceFactory.getUserService();
 		User user = userService.getCurrentUser();
+		log.info("Upload servlet active");
 		if (user != null) {
-
 			Map<String, List<BlobKey>> blobs = blobstoreService.getUploads(req);
-			BlobKey blobKey = blobs.get("newImage").get(0);
-
-			ObjectMapper mapper = new GraffitiSerialization().getMapper();
-			
-			Image image = ImageManager.createImage(blobKey, user);
-
-			System.out.println("Stored image: "+image.getImageURL()+" uploaded by "+user.getUserId());
-			
-			if(GraffitiServlet.isDevelopment){
-				String ip = req.getLocalAddr();
-				String imageURL = image.getImageURL();
-				imageURL = imageURL.replaceAll("//.*:8888","//"+ip+":8888");
-				image.setImageURL(imageURL);
+			BlobKey blobKey = null;
+			for(String key:blobs.keySet()){
+				List<BlobKey> blobKeys = blobs.get(key);
+				for(BlobKey foundKey:blobKeys){
+					blobKey = foundKey;
+					break;
+				}
+				if(blobKey!=null)
+					break;
 			}
-			
-			mapper.writeValue(res.getOutputStream(), new ImageCreatedResponse(
-					image.getImageURL()));
+			log.info("User "+user.getEmail()+" attempting to upload "+blobs.entrySet().size()+" files.");
+			ObjectMapper mapper = new GraffitiSerialization().getMapper();
+			Image image = null;
+			if(blobKey!=null){
+
+
+				image = ImageManager.createImage(blobKey, user);
+
+				System.out.println("Stored image: " + image.getImageURL()
+						+ " uploaded by " + user.getUserId());
+
+				if (GraffitiServlet.isDevelopment) {
+					String ip = req.getLocalAddr();
+					String imageURL = image.getImageURL();
+					imageURL = imageURL.replaceAll("//.*:8888", "//" + ip
+							+ ":8888");
+					image.setImageURL(imageURL);
+				}
+
+			}
+			String imageURL = null;
+			if(image!=null)
+				imageURL = image.getImageURL();
+			mapper.writeValue(res.getOutputStream(),
+					new ImageCreatedResponse(imageURL));
 		}
 	}
 

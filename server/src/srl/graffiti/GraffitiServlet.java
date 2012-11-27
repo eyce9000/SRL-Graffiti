@@ -64,4 +64,9 @@ public class GraffitiServlet extends JsonRequestServlet {
 		if(isDevelopment)
 			System.out.println("Starting server in Development Mode");
 	}
+	
+	@Override
+	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException{
+		resp.getWriter().append("You must POST to this URL");
+	}
 }

@@ -35,6 +35,9 @@ public class ImageUploader {
 		 * This upload code is a modified version of that found on this website
 		 * http://reecon.wordpress.com/2010/04/25/uploading-files-to-http-server-using-post-android-sdk/
 		 */
+		
+		log.info("Uploading to "+uploadUrl);
+		
 		HttpURLConnection connection = null;
 		DataOutputStream outputStream = null;
 		DataInputStream inputStream = null;
@@ -65,7 +68,7 @@ public class ImageUploader {
 			connection.setRequestProperty("Content-Type",
 					"multipart/form-data;boundary=" + boundary);
 			connection.addRequestProperty("Cookie",authCookieName+"="+authCookieValue);
-
+			connection.setConnectTimeout(30000);
 			outputStream = new DataOutputStream(connection.getOutputStream());
 			outputStream.writeBytes(twoHyphens + boundary + lineEnd);
 			outputStream
@@ -97,6 +100,9 @@ public class ImageUploader {
 			outputStream.writeBytes(twoHyphens + boundary + twoHyphens
 					+ lineEnd);
 
+			outputStream.flush();
+			outputStream.close();
+			
 			// Responses from the server (code and message)
 			int serverResponseCode = connection.getResponseCode();
 			log.info("Image upload response: "+serverResponseCode);
