@@ -106,11 +106,8 @@ public class UploadServlet extends HttpServlet {
 				}
 
 			}
-			String imageURL = null;
-			if(image!=null)
-				imageURL = image.getImageURL();
 			mapper.writeValue(res.getOutputStream(),
-					new ImageCreatedResponse(imageURL));
+					new ImageCreatedResponse(image.getImageURL()));
 		}
 	}
 

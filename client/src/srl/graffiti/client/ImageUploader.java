@@ -4,14 +4,21 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.net.HttpURLConnection;
+import java.net.URI;
 import java.net.URL;
 
+import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.mime.HttpMultipartMode;
 import org.apache.http.entity.mime.MultipartEntity;
+import org.apache.http.entity.mime.content.ContentBody;
 import org.apache.http.entity.mime.content.FileBody;
+import org.apache.http.impl.client.DefaultHttpClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,25 +26,48 @@ import srl.distributed.messages.ErrorResponse;
 import srl.distributed.messages.Response;
 import srl.graffiti.GraffitiSerialization;
 
-
 public class ImageUploader {
 	private static Logger log = LoggerFactory.getLogger("ImageUploader");
 	private static String authCookieName;
 	private static String authCookieValue;
-	public static void configureAuthentication(String cookieName, String value){
+
+	public static void configureAuthentication(String cookieName, String value) {
 		authCookieName = cookieName;
 		authCookieValue = value;
 	}
-	
-	public static Response uploadFiles(String uploadUrl,UploadProgressListener listener
-			,File imageFile){
+
+	public static Response uploadFiles(DefaultHttpClient client,
+			String uploadUrl, UploadProgressListener listener, File imageFile) {
+		try {
+			URI uri = new URI(uploadUrl);
+			HttpPost post = new HttpPost(uri);
+
+			MultipartEntity entity = new MultipartEntity();
+			ContentBody body = new FileBody(imageFile, "image/jpeg");
+			entity.addPart("userfile", body);
+
+			post.setEntity(entity);
+			HttpResponse resp = client.execute(post);
+			Response response = new GraffitiSerialization().getMapper()
+					.readValue(resp.getEntity().getContent(), Response.class);
+			return response;
+		} catch (Exception ex) {
+			log.error("Upload error", ex);
+			return new ErrorResponse(ex);
+		}
+	}
+
+	public static Response uploadFiles(String uploadUrl,
+			UploadProgressListener listener, File imageFile) {
 		/*
 		 * This upload code is a modified version of that found on this website
-		 * http://reecon.wordpress.com/2010/04/25/uploading-files-to-http-server-using-post-android-sdk/
+		 * http
+		 * ://reecon.wordpress.com/2010/04/25/uploading-files-to-http-server-
+		 * using-post-android-sdk/
 		 */
-		
-		log.info("Uploading to "+uploadUrl);
-		
+
+		log.info("Uploading to " + uploadUrl);
+
 		HttpURLConnection connection = null;
 		DataOutputStream outputStream = null;
 		DataInputStream inputStream = null;
@@ -67,8 +97,10 @@ public class ImageUploader {
 			connection.setRequestProperty("Connection", "Keep-Alive");
 			connection.setRequestProperty("Content-Type",
 					"multipart/form-data;boundary=" + boundary);
-			connection.addRequestProperty("Cookie",authCookieName+"="+authCookieValue);
-			connection.setConnectTimeout(30000);
+			connection.addRequestProperty("Cookie", authCookieName + "="
+					+ authCookieValue);
+			connection.setConnectTimeout(60000);
+
 			outputStream = new DataOutputStream(connection.getOutputStream());
 			outputStream.writeBytes(twoHyphens + boundary + lineEnd);
 			outputStream
@@ -85,14 +117,14 @@ public class ImageUploader {
 
 			long length = imageFile.length();
 			long totalSent = bytesRead;
-			
+
 			while (bytesRead > 0) {
 				outputStream.write(buffer, 0, bufferSize);
 				bytesAvailable = fileInputStream.available();
 				bufferSize = Math.min(bytesAvailable, maxBufferSize);
 				bytesRead = fileInputStream.read(buffer, 0, bufferSize);
 				totalSent += bytesRead;
-				if(listener!=null)
+				if (listener != null)
 					listener.onUploadProgress(imageFile, totalSent, length);
 			}
 
@@ -102,13 +134,13 @@ public class ImageUploader {
 
 			outputStream.flush();
 			outputStream.close();
-			
+
 			// Responses from the server (code and message)
 			int serverResponseCode = connection.getResponseCode();
-			log.info("Image upload response: "+serverResponseCode);
+			log.info("Image upload response: " + serverResponseCode);
 			String serverResponseMessage = connection.getResponseMessage();
-			Response response = new GraffitiSerialization().getMapper().readValue(
-					connection.getInputStream(), Response.class);
+			Response response = new GraffitiSerialization().getMapper()
+					.readValue(connection.getInputStream(), Response.class);
 
 			fileInputStream.close();
 			outputStream.flush();

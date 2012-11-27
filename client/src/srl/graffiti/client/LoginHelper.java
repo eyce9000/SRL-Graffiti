@@ -104,7 +104,7 @@ public class LoginHelper {
 			throw new Exception("Did not find SACSID cookie");
 
 		} finally {
-			// client.getConnectionManager().shutdown();
+			//client.getConnectionManager().shutdown();
 		}
 	}
 

@@ -62,6 +62,7 @@ public class TestApplication {
 		} else {
 			client = new Client(new URL(
 					"https://srl-graffiti.appspot.com/graffiti"));
+			client.setMessageLoggingEnabled(new File("test.log.json"));
 			client.setObjectMapperProvider(new GraffitiSerialization());
 
 			token = LoginHelper.loginToGoogleAppEngine(client.getHttpClient(),
@@ -91,7 +92,7 @@ public class TestApplication {
 
 		};
 
-		Response response = ImageUploader.uploadFiles(sessionURL, listener,
+		Response response = ImageUploader.uploadFiles(client.getHttpClient(),sessionURL, listener,
 				new File("image.jpg"));
 		String imageURL = ((ImageCreatedResponse) response).getImageURL();
 		

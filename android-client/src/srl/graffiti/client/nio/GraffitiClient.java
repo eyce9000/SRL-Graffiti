@@ -1,9 +1,13 @@
 package srl.graffiti.client.nio;
 
 import java.io.File;
+import java.net.URI;
 import java.net.URL;
 import java.util.Collection;
 import java.util.List;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.client.methods.HttpPost;
 
 import srl.distributed.client.Client;
 import srl.distributed.messages.Request;
@@ -34,6 +38,7 @@ public class GraffitiClient {
 	private URL serverURL;
 	private boolean isTestServer;
 
+	
 	/**
 	 * Creates a new GraffitiClient.
 	 * 
@@ -131,8 +136,12 @@ public class GraffitiClient {
 							
 						};
 						
-						response = ImageUploader.uploadFiles(sessionURL, listener ,params[0]);
+						
+						
+						response = ImageUploader.uploadFiles(client.getHttpClient(),sessionURL, listener ,params[0]);
 						if (response instanceof ImageCreatedResponse) {
+							Log.i("GraffitiClientTest",((ImageCreatedResponse) response)
+									.getImageURL());
 							return ((ImageCreatedResponse) response)
 									.getImageURL();
 						} else {

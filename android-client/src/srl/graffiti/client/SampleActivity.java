@@ -104,8 +104,11 @@ public class SampleActivity extends Activity {
 		try {
 			Log.i("GraffitiClientTest", "Trying to run test");
 
+//			SampleActivity.this.client = new GraffitiClient(new URL(
+//					"http://192.168.2.5:8888/graffiti"), true);
+			
 			SampleActivity.this.client = new GraffitiClient(new URL(
-					"http://192.168.2.5:8888/graffiti"), true);
+					"https://srl-graffiti.appspot.com/graffiti"), false);
 			
 			client.logIn("test@gmail.com", "password",
 					new Callback<Boolean>() {
